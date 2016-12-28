@@ -1,26 +1,29 @@
-(function() {
-
-    // initial state
-    var initialState = {
-        count: 0
-    };
+(function(_) {
 
     // action map for my simple reducer
     var actionMap = {
+        '': Init,
         ADD: Add,
         DEL: Del
     }
 
     // create the store, bind subscriber and exposes as global
-    var store = Redux.createStore(MySimpleReducer, initialState);
+    var store = Redux.createStore(MySimpleReducer, {});
     store.subscribe(ScreenUpdater);
-    store.dispatch({ type: 'INIT' });  // will call the subscribers for the first time
     window.store = store;
 
-    // my simple reducer implementation: uses the actionMap to find the action, and runs
+    // executes init action
+    store.dispatch({ type: '' });
+
+    // my simple reducer implementation: uses the actionMap to find the action, and invokes the action
     function MySimpleReducer(state, action) {
         var actionMapped = actionMap[action.type];
-        return actionMapped ? actionMapped(state) || state : state;
+        if(actionMapped) {
+            var clonedState = _.clone(state);
+            return actionMapped(clonedState, action) || clonedState;
+        } else {
+            return state;
+        }
     }
 
     // subscriber implementation
@@ -30,15 +33,19 @@
         $('#delButton').attr('disabled', store.getState().count < 1);
     }
 
+    // action Init implementation
+    function Init(state, action) {
+        state.count = 0;
+    }
+
     // action Add implementation
-    function Add(state) {
-        return { count: state.count + 1 };
+    function Add(state, action) {
+        state.count++;
     }
 
     // action Del implementation
-    function Del(state) {
-        return { count: state.count - 1 };
+    function Del(state, action) {
+        state.count--;
     }
 
-})();
-
+})(_);

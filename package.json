@@ -4,6 +4,7 @@
   "description": "redux es5 basic test with rest mock",
   "main": "index.js",
   "scripts": {
+    "start": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,6 +12,7 @@
   "dependencies": {
     "redux": "^3.6.0",
     "purecss": "^0.6.1",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "underscore": "^1.8.3"
   }
 }
