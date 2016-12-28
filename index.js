@@ -26,9 +26,9 @@
         }
     }
 
-    // subscriber implementation
+    // subscriber test implementation
     function ScreenUpdater() {
-        $('.outpanel .list').append('<div class="pure-u-1-6">[' + store.getState().count +']</div>');
+        $('.outpanel .list').append('<div class="pure-u-1-6 '  + store.getState()['style'] + '"><span class="label">' + store.getState().count +'</span></div>');
         $('#addButton').attr('disabled', store.getState().count >= 10);
         $('#delButton').attr('disabled', store.getState().count < 1);
     }
@@ -41,11 +41,13 @@
     // action Add implementation
     function Add(state, action) {
         state.count++;
+        state.style = 'added';
     }
 
     // action Del implementation
     function Del(state, action) {
         state.count--;
+        state.style = '';
     }
 
 })(_);
