@@ -4,7 +4,7 @@
   "description": "redux es5 basic test",
   "main": "index.js",
   "scripts": {
-    "postinstall": "copyfiles -f **/pure-min.css **/jquery.min.js **/redux.min.js **/underscore-min.js dist",
+    "postinstall": "copyfiles -f node_modules/**/pure-min.css node_modules/**/jquery.min.js node_modules/**/redux.min.js node_modules/**/underscore-min.js dist",
     "start": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
